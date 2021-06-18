@@ -11,19 +11,17 @@
   "author": "Dane Snyman",
   "license": "ISC",
   "devDependencies": {
-    "@types/howler": "^2.2.1",
+    "@types/three": "^0.129.1",
     "css-loader": "^5.0.1",
     "node-sass": "^5.0.0",
     "sass-loader": "^11.0.0",
     "ts-loader": "^8.0.15",
-    "typescript": "^4.1.3",
+    "typescript": "^4.3.2",
     "webpack": "^5.20.2",
-    "webpack-cli": "^4.5.0",
-    "@types/animejs": "^3.1.2"
+    "webpack-cli": "^4.5.0"
   },
   "dependencies": {
-    "animejs": "^3.2.1",
-    "howler": "^2.2.1",
-    "style-loader": "^2.0.0"
+    "style-loader": "^2.0.0",
+    "three": "^0.129.0"
   }
 }
