@@ -67,33 +67,15 @@ export class LoadingScene {
     this.scene.add(this.pointLight);
   }
 
-  private loadModels(): void {
+  private async loadModels(): Promise<void> {
     const loader = new GLTFLoader();
+    this.shiba = await loader.loadAsync("./assets/models/shiba/scene.gltf");
+    this.scene.add(this.shiba.scene);
+    this.shiba.scene.position.z = -1;
 
-    loader.load(
-      "./assets/models/shiba/scene.gltf",
-      (gltf) => {
-        this.shiba = gltf;
-        this.scene.add(this.shiba.scene);
-        this.shiba.scene.position.z = -1;
-      },
-      undefined,
-      (error) => {
-        console.error(error);
-      }
-    );
-    loader.load(
-      "./assets/models/planet/scene.gltf",
-      (gltf) => {
-        this.planet = gltf;
-        this.scene.add(this.planet.scene);
-        this.planet.scene.position.z = -600;
-      },
-      undefined,
-      (error) => {
-        console.error(error);
-      }
-    );
+    this.planet = await loader.loadAsync("./assets/models/planet/scene.gltf");
+    this.scene.add(this.planet.scene);
+    this.planet.scene.position.z = -600;
   }
 
   private starField(nStars: number): void {
