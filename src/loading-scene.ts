@@ -17,7 +17,7 @@ export class LoadingScene {
   private renderer: WebGLRenderer;
   private shiba: GLTF;
   private planet: GLTF;
-  private readonly speed = Math.floor(Math.random() * (1400 - 1000) + 1000);
+  private readonly speed = Math.floor(Math.random() * (1700 - 1000) + 1000);
 
   constructor(nStars: number) {
     this.scene = new Scene();
@@ -36,7 +36,7 @@ export class LoadingScene {
       this.shiba.scene.rotation.y = time / 1000;
       this.shiba.scene.rotation.z = time / 1000;
       const scale = Math.sin(time / this.speed);
-      this.shiba.scene.scale.setScalar(scale < 0 ? -scale : scale);
+      this.shiba.scene.scale.setScalar(scale < 0 ? 0 : scale);
     }
     if (this.planet?.scene) {
       this.planet.scene.rotation.x = time / 4000;
@@ -69,13 +69,14 @@ export class LoadingScene {
 
   private async loadModels(): Promise<void> {
     const loader = new GLTFLoader();
-    this.shiba = await loader.loadAsync("./assets/models/shiba/scene.gltf");
-    this.scene.add(this.shiba.scene);
-    this.shiba.scene.position.z = -1;
-
     this.planet = await loader.loadAsync("./assets/models/planet/scene.gltf");
+    this.shiba = await loader.loadAsync("./assets/models/shiba/scene.gltf");
+
     this.scene.add(this.planet.scene);
+    this.scene.add(this.shiba.scene);
+
     this.planet.scene.position.z = -600;
+    this.shiba.scene.position.z = -1;
   }
 
   private starField(nStars: number): void {
